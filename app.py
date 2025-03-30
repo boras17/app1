@@ -3,7 +3,7 @@ import pickle
 import pandas as pd
 from datetime import datetime
 startTime = datetime.now()
-filename = "model2.sv"
+filename = "./model2.sv"
 model = pickle.load(open(filename, 'rb'))
 # otwieramy wcześniej wytrenowany model
 
@@ -17,7 +17,7 @@ fastingBs = {0: 'Sugar level normal',1: 'Sugar level increased'}
 
 # o ile wcześniej kodowaliśmy nasze zmienne, to teraz wprowadzamy etykiety z ich nazewnictwem
 
-original_data_set = pd.read_csv('DSP_8.csv', index_col=False)
+original_data_set = pd.read_csv('./DSP_8.csv', index_col=False)
 
 age_min = int(original_data_set['Age'].min())
 age_max = int(original_data_set['Age'].max())
