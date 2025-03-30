@@ -11,7 +11,7 @@ from pathlib import Path
 temp = pathlib.PosixPath
 pathlib.PosixPath = pathlib.WindowsPath
 
-filename = "model.sv"
+filename = "./model.sv"
 model = pickle.load(open(filename, 'rb'))
 # otwieramy wcześniej wytrenowany model
 
@@ -21,7 +21,7 @@ sex_d = {0: 'Mężczyzna', 1: 'Kobieta'}
 class_d = {0: 'Klasa 1', 1: 'Klasa 2', 2: 'Klasa 3'}
 # o ile wcześniej kodowaliśmy nasze zmienne, to teraz wprowadzamy etykiety z ich nazewnictwem
 
-original_data_set = pd.read_csv('DSP_1.csv', index_col=False)
+original_data_set = pd.read_csv('./DSP_1.csv', index_col=False)
 
 age_min = int(original_data_set['Age'].min())
 age_max = int(original_data_set['Age'].max())
