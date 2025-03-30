@@ -62,10 +62,6 @@ def main():
         st.subheader("Czy taka osoba przeżyłaby katastrofę?")
         st.subheader(("Tak" if survival[0] == 1 else "Nie"))
         st.write("Pewność predykcji {0:.2f} %".format(s_confidence[0][survival][0] * 100))
-        if survival[0] == 0:
-            st.image("https://i.kym-cdn.com/entries/icons/mobile/000/026/489/crying.jpg")
-        else:
-            st.image("https://cdn.pixabay.com/photo/2022/11/26/22/35/cat-7618582_960_720.jpg")
 
 
 if __name__ == "__main__":
