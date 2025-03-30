@@ -34,7 +34,12 @@ maxHR_max = int(original_data_set['MaxHR'].max())
 min_oldpeak = float(0)
 max_oldpeak = float(original_data_set['Oldpeak'].max())
 
-
+def check_non_null(data):
+    for d in data:
+        if d is None:
+            return False
+    return True
+    
 def main():
 
     st.set_page_config(page_title="Will he get sick?")
@@ -58,21 +63,19 @@ def main():
         maxHR_slider = st.slider("Max HR", min_value=maxHR_min, max_value=maxHR_max, step=1)
         oldPeak_slider = st.slider("Old peak", min_value=min_oldpeak, max_value=max_oldpeak, step=0.1)
 
-    data = [[age_slider, sex_radio, chestPainTypeRadio, restingbp_slider,
-             cholesterol_slider, fastingBsRadio, restingECGRadio, maxHR_slider, exerciseAnginaRadio, oldPeak_slider, stSlopeRadio]]
-    print(data)
-    survival = model.predict(data)
-    s_confidence = model.predict_proba(data)
-
-
-    with prediction:
-        st.subheader("Will heart disease occur?")
-        st.subheader(("Yes" if survival[0] == 1 else "No"))
-        st.write("Prediction certainty {0:.2f} %".format(s_confidence[0][survival][0] * 100))
-        if survival[0] == 1:
-            st.image("https://i.kym-cdn.com/entries/icons/mobile/000/026/489/crying.jpg")
-        else:
-            st.image("https://cdn.pixabay.com/photo/2022/11/26/22/35/cat-7618582_960_720.jpg")
+    if check_non_null(data[0]):
+        
+        survival = model.predict(data)
+        s_confidence = model.predict_proba(data)
+    
+        with prediction:
+            st.subheader("Czy taka osoba przeżyłaby katastrofę?")
+            st.subheader(("Tak" if survival[0] == 1 else "Nie"))
+            st.write("Pewność predykcji {0:.2f} %".format(s_confidence[0][survival][0] * 100))
+            if survival[0] == 0:
+                st.image("https://i.kym-cdn.com/entries/icons/mobile/000/026/489/crying.jpg")
+            else:
+                st.image("https://cdn.pixabay.com/photo/2022/11/26/22/35/cat-7618582_960_720.jpg")
 
 if __name__ == "__main__":
     main()
